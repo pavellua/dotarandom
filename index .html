@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Teams</title>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<body>
+	<style type="text/css">
+
+		body {
+			background-image: url(dota.jpg);
+			color: white;
+			font-family: 'Play', sans-serif;
+			font-size: 25px;
+
+		}
+		button {
+
+		}
+		table {
+			line-height: 1.3;
+
+		}
+		.all-content {
+			display: flex;
+			justify-content: space-between;
+			margin: 2% 6%;
+			text-align: center;
+
+
+		}
+		.table-players {
+			text-align: left;
+
+		}
+		.table-players th, td {
+			padding: 5px;
+		}
+		.table-players, .table-players th, .table-players td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		.all-players, .shuffle {
+			text-align: center;
+			margin-bottom: 50px;
+		}
+		.all-players h2, .players-for-game h2 {
+			margin-top: 0;
+		}
+		.teams {
+			margin: auto;
+			width: 500px;
+			display: flex;
+			justify-content: space-between;
+			text-align: center;
+			font-size: 18px;
+		}
+		.team-1 {
+			color:green;
+		}
+		.team-2 {
+			color:#910a00
+		}
+		.team-1-total-rate, .team-2-total-rate {
+			margin-top: 50px;
+		}
+	</style>
+
+	<div class="all-content">
+		<div class="all-players">
+			<h2>Список всех игроков</h2>
+			<table class="table-players">
+				<tr>
+					<th>Имя(Ник)</th>
+					<th>Рейтинг</th>
+					<th>Играет?</th>
+				</tr>
+				<tr>
+					<td>Коля(Опасен Но Прекрасен)</td>
+					<td>9.09</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Саня Беляев(10 баллов)</td>
+					<td>8.64</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Вова(Кто, если не Я?)</td>
+					<td>8.55</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Саня Гелла(a.H)</td>
+					<td>8.09</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Паша(pavel.ua)</td>
+					<td>8.00</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Тёма(Art-1st)</td>
+					<td>7.90</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Антон Балабай(Luca)</td>
+					<td>7.60</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Руслан(РУСЁК СОКИРА)</td>
+					<td>7.20</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Рома Стадник(AltRock)</td>
+					<td>6.70</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Макс</td>
+					<td>5.82</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Тим(Тащииии)</td>
+					<td>5.57</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Саня друг Тима(Кося4ок)</td>
+					<td>5.50</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Паща</td>
+					<td>5.09</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Агата(Coronavirus)</td>
+					<td>4.36</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Тоха Скорик(Tonya)</td>
+					<td>3.64</td>
+					<th><input type="checkbox"></th>
+				</tr>
+				<tr>
+					<td>Жека Ляшко(Tunech1)</td>
+					<td>0</td>
+					<th><input type="checkbox"></th>
+				</tr>
+			</table>
+		</div>
+		<div class="players-for-game">
+			<h2>Игроки для текущей игры</h2>
+		</div>
+		<div class="ready-to-play">
+			<div class="shuffle ">
+				<button class="btn btn-outline-light">Сбалансировать</button>
+			</div>
+			<div class="teams">
+				<div class="team-1">
+					<h2>Команда 1</h2>
+					<h3 class="team-1-total-rate">Общий рейтинг: 0</h3>
+				</div>
+				<div class="team-2">
+					<h2>Команда 2</h2>
+					<h3 class="team-2-total-rate">Общий рейтинг: 0</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const checkboxes = document.querySelectorAll('.all-players input[type="checkbox"]');
+		const allPlayersList = document.querySelector('.all-players');
+		const playersForGame = document.querySelector('.players-for-game');
+		const shuffleBtn = document.querySelector('.shuffle');
+		const team1 = document.querySelector('.team-1');
+		const team1TotalRate = document.querySelector('.team-1-total-rate');
+		const team2 = document.querySelector('.team-2');
+		const team2TotalRate = document.querySelector('.team-2-total-rate');
+		const allRatesValues = [];
+
+		function handleCheck() {
+			if (this.checked) {
+				const playerForGame = document.createElement('p');
+				playerForGame.innerText = this.parentNode.parentNode.children[0].innerText;
+				playerForGame.classList.add('player-name');
+				allRatesValues.push(Number(this.parentNode.parentNode.children[1].innerText));
+				playersForGame.appendChild(playerForGame);
+			} else {
+				const allPlayersForGame = document.querySelectorAll('.player-name');
+				for (let i = 0; i < allPlayersForGame.length; i++) {
+					if (this.parentNode.parentNode.children[0].innerText === allPlayersForGame[i].innerText) {
+						allPlayersForGame[i].remove();
+						allRatesValues.splice(allRatesValues.indexOf(Number(this.parentNode.parentNode.children[1].innerText)), 1);
+					}
+				}
+			}
+		}
+
+		function shuffle() {
+			for (var i = team1.children.length - 2; i > 0; i--) {
+				team1.children[i].remove();
+			}
+
+			for (var i = team2.children.length - 2; i > 0; i--) {
+				team2.children[i].remove();
+			}
+
+			const totalRate = allRatesValues.reduce(((total, rate) => total + rate), 0);
+			const allPlayersNames = Array.from(document.querySelectorAll('.player-name')).map(name => name.innerText);
+
+			let firstTeamAllPlayers = 0;
+			let secondTeamAllPlayers = 0;
+			let firstTeamTotalRate = 0;
+			let secondTeamTotalRate = 0;
+
+			function addToFirstTeam(i) {
+				const firstTeamPlayer = document.createElement('p');
+				firstTeamPlayer.innerText = allPlayersNames[i];
+				team1.insertBefore(firstTeamPlayer, team1TotalRate);
+				firstTeamAllPlayers++;
+				firstTeamTotalRate += allRatesValues[i];
+				team1TotalRate.innerText = `Общий рейтинг: ${firstTeamTotalRate.toFixed(1)}`;
+			}
+
+			function addToSecondTeam(i) {
+				const secondTeamPlayer = document.createElement('p');
+				secondTeamPlayer.innerText = allPlayersNames[i];
+				team2.insertBefore(secondTeamPlayer, team2TotalRate);
+				secondTeamAllPlayers++;
+				secondTeamTotalRate += allRatesValues[i];
+				team2TotalRate.innerText = `Общий рейтинг: ${secondTeamTotalRate.toFixed(1)}`;
+			}
+
+			for (let i = 0; i < allPlayersNames.length; i++) {
+				const random = Math.random();
+				if (random < 0.5 && firstTeamAllPlayers < 5) {
+					addToFirstTeam(i);
+				} else if (random < 0.5 && firstTeamAllPlayers === 5) {
+					addToSecondTeam(i)
+				} else if (random >= 0.5 && secondTeamAllPlayers < 5) {
+					addToSecondTeam(i)
+				} else if (random >= 0.5 && secondTeamAllPlayers === 5) {
+					addToFirstTeam(i);
+				}
+			}
+
+			if ( !(((totalRate / 2) - 0.5) < firstTeamTotalRate && (firstTeamTotalRate < ((totalRate / 2) + 0.5))) ) {
+				shuffle();
+			}
+
+		}
+
+		checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+		shuffleBtn.addEventListener('click', shuffle);
+	</script>
+</body>
+</html>
