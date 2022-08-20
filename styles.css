@@ -1,0 +1,89 @@
+body {
+    background-color: rgb(59, 59, 59);
+    color: #fff;
+    background-image: url(img/back.jpeg);
+    background-size: auto 100%;
+    background-position: 50% 0;
+    background-attachment: fixed;
+    margin: 0;
+}
+#game {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.8);
+  
+    
+    padding: 20px 0 0 50px;
+}
+input {
+    width: 25px;
+    height: 25px;
+}
+.option {
+    display: flex;
+    align-items: center;
+}
+.option input {
+    margin-left: 10px;
+}
+.playerDiv {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.playerDiv input {
+    
+    margin-right: 15px;
+}
+.playerDiv span {
+    
+    margin-right: 15px;
+}
+
+#result {
+    display: flex;
+    margin-top: 30px;
+}
+#selectAll {
+    margin-bottom: 15px;
+}
+#settings div{
+margin-bottom: 20px;
+}
+.teamDiv {
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.playerName{
+    margin: 4px 0;
+}
+#playersToday {
+    font-size: 12px;
+    color: rgb(202, 172, 0);
+}
+.teamName {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: rgb(219, 106, 0);
+}
+
+
+@media screen and (max-width: 500px) {
+    #game {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+    }
+    .playerName {
+        font-size: 20px;
+    }
+    #result {
+        flex-wrap: wrap;
+    }
+    .teamName {
+        font-size: 26px;
+    }
+  }
