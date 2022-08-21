@@ -12,7 +12,7 @@ const naborIgrokov = [
 },
 {
     name: "Тимур",
-    rate: 8
+    rate: 8.3
 },
 {
     name: "Сергей Федоров",
@@ -28,7 +28,7 @@ const naborIgrokov = [
 },
 {
     name: "Игорь Тихоновский",
-    rate: 5
+    rate: 4.6
 },
 {
     name: "Руслан",
@@ -48,7 +48,7 @@ const naborIgrokov = [
 },
 {
     name: "Брат Артем",
-    rate: 7
+    rate: 6.8
 },
 {
     name: "Брат Вадик",
@@ -67,7 +67,7 @@ const naborIgrokov = [
 },
 {
     name: "Саня",
-    rate: 7
+    rate: 7.5
 },
 {
     name: "Ярик малой",
@@ -75,7 +75,7 @@ const naborIgrokov = [
 },
 {
     name: "Даниил высокий",
-    rate: 5
+    rate: 5.5
 },
 {
     name: "Даниил малой",
@@ -87,16 +87,24 @@ const naborIgrokov = [
 },
 {
     name: "Артем защитник",
-    rate: 6
+    rate: 6.2
 },
 {
     name: "Рома",
     rate: 5
+},
+{
+    name: "Дима",
+    rate: 8
 }
 ];
-let resultMassive = [];
-const rangeRate = 2;
-
+let resultMassive;
+const rangeRate = 0.21;
+let playersInTeam;
+let kolKomand;
+let playersIn;
+let averageScorePlayer;
+let allTeamMas = [];
 sortMas(naborIgrokov,'name');
 
 function showPlayers () {
@@ -109,14 +117,8 @@ function showPlayers () {
         playerCheckBox.type = 'checkbox';
         playerDiv.append(playerCheckBox);
         playerCheckBox.addEventListener('click', ()=> {
-            let howManyPlayers = 0;
-            for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
-                if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
-                    howManyPlayers++;
-                }
-                
-            }
-            document.getElementById('playersToday').innerHTML = '(' + howManyPlayers + ' игроков' + ')';
+            numberOfPlayers()
+            
         })
 
         let playerName = document.createElement('span');
@@ -129,8 +131,8 @@ function showPlayers () {
     }
     
 }
-function shuffleTeams (kolKomand) {
-    let playersIn = [];
+function shuffleTeams () {
+    playersIn = [];
     for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
         if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
             playersIn.push(naborIgrokov[i]);
@@ -140,13 +142,13 @@ function shuffleTeams (kolKomand) {
     
     playersIn = randomizeMassive (playersIn);
     if (document.getElementById('randomShuffle').querySelector('input').checked == true) {
-        randomShuffle (kolKomand,playersIn);
+        randomShuffle ();
     }
     else {
         
         if (playersIn.length%kolKomand == 0) {
-            let playersInTeam = playersIn.length/kolKomand;
-            fairShuffle (kolKomand,playersIn,playersInTeam);
+            playersInTeam = playersIn.length/kolKomand;
+            fairShuffle ();
             
         }
         else {
@@ -155,34 +157,46 @@ function shuffleTeams (kolKomand) {
     }
 }
 
-function randomShuffle (kolKomand,playersIn) {
+function randomShuffle () {
     console.log('Полный рандом активирован')
+    resultMassive = [];
     let kolCyklov = playersIn.length;
         let teamNumber = 1;
+        let averagePlayerTeamRate=0;
+        let teamMas = [];
             for(let i=0; i<kolCyklov; i++) {
-                let player = document.createElement('span');
-                player.className = 'playerName';
                 let numberPlayerToTheTeam = Math.floor(Math.random()*playersIn.length);
-                player.innerHTML = playersIn[numberPlayerToTheTeam].name;
+                averagePlayerTeamRate += playersIn[numberPlayerToTheTeam].rate;
+                // let player = document.createElement('span');
+                // player.className = 'playerName';
                 
-                playersIn.splice(numberPlayerToTheTeam,1)
+                // player.innerHTML = playersIn[numberPlayerToTheTeam].name;
+                teamMas.push(playersIn[numberPlayerToTheTeam])
+                playersIn.splice(numberPlayerToTheTeam,1);
                 
-                document.getElementById('team'+teamNumber).append(player);
+                // document.getElementById('team'+teamNumber).append(player);
                 teamNumber++;
                 if (teamNumber>kolKomand) {
+                    resultMassive.push({
+                        teamMassive: teamMas,
+                        averagePlayerTeamRate: averagePlayerTeamRate,
+                        differenceRate: Math.abs(averagePlayerTeamRate - averageScorePlayer)
+                    });
                     teamNumber =1 ;
+                    averagePlayerTeamRate = 0;
+                    teamMas = [];
+                    
                 }
             }
-            
+            showBalanceTeams();
 }
-function fairShuffle (kolKomand,playersIn,playersInTeam) {
-
+function fairShuffle () {
     
-  let allTeamMas = [];
+  allTeamMas = [];
 
  
 
-  let averageScorePlayer = playersIn.reduce(
+  averageScorePlayer = playersIn.reduce(
     (accumulator,currentPlayer) => accumulator + currentPlayer.rate,0
   )/playersIn.length;
   
@@ -234,7 +248,7 @@ function fairShuffle (kolKomand,playersIn,playersInTeam) {
     
     getTeam(0,0,'');
     sortMas(allTeamMas,'differenceRate');
-    getTeamsWithOptions (allTeamMas,kolKomand);
+    getTeamsWithOptions (allTeamMas);
     
     }
   
@@ -243,7 +257,7 @@ document.getElementById('buttonShuffle').addEventListener('click', () => {
     resultMassive = [];
     document.getElementById('result').innerHTML = '';
     document.getElementById('players').style.display = 'none';
-    let kolKomand = document.getElementById('kolKomand').querySelector('input').value;
+    kolKomand = document.getElementById('kolKomand').querySelector('input').value;
     for (let i=0; i<kolKomand; i++) {
         let teamDiv = document.createElement('div');
         teamDiv.className = 'teamDiv';
@@ -254,7 +268,7 @@ document.getElementById('buttonShuffle').addEventListener('click', () => {
         teamName.innerHTML = 'Team ' + (i+1);
         teamDiv.append(teamName);
     }
-    shuffleTeams (kolKomand);
+    shuffleTeams ();
     
 })
 
@@ -274,9 +288,10 @@ function selectAllPlayers () {
 }
 document.getElementById('selectAll').querySelector('input').addEventListener('click', () => {
     selectAllPlayers();
+    numberOfPlayers();
 })
-function sortMas (allTeamMas,parametr) {
-    allTeamMas.sort(function (a, b) {
+function sortMas (sortingMas,parametr) {
+    sortingMas.sort(function (a, b) {
         if (a[parametr] > b[parametr]) {
           return 1;
         }
@@ -312,23 +327,23 @@ function getTeamsWithOptions (massive) {
        
         function randomBalanceTeam () {
             
-            let teamIndex = Math.floor(Math.random()*(massive.length-1));
-            if (resultMassive.length == 0) {
-                resultMassive.push(massive[teamIndex]);
-                massive.splice(teamIndex,1);
-                randomBalanceTeam();
-            }
-            else {
-                let compare = compareParametrs (massive[teamIndex]);
-                if (compare) {
+let kolCyklov = massive.length;
+            for (let i=0; i<kolCyklov; i++) {
+                let teamIndex = Math.floor(Math.random()*(massive.length-1));
+                if (resultMassive.length == 0) {
                     resultMassive.push(massive[teamIndex]);
+                    massive.splice(teamIndex,1);
                 }
-                massive.splice(teamIndex,1);
-                if (massive.length != 0) {
-                    randomBalanceTeam();
+                else {
+                    let compare = compareParametrs (massive[teamIndex]);
+                    if (compare) {
+                        resultMassive.push(massive[teamIndex]);
+                    }
+                    massive.splice(teamIndex,1);
+                    
                 }
             }
-               
+
                     
                     
                     
@@ -337,12 +352,12 @@ function getTeamsWithOptions (massive) {
         randomBalanceTeam ();
 
 
-    }   
+    }       
     showBalanceTeams ();
 }
 function showBalanceTeams () {
     for(let i in resultMassive) {
-        // document.getElementById('team' + (Number(i)+1)).querySelector('span').innerHTML += ' (' + resultMassive[i].averagePlayerTeamRate + ')';
+        document.getElementById('team' + (Number(i)+1)).querySelector('span').innerHTML += ' (' + resultMassive[i].averagePlayerTeamRate + ')';
         for (let j in resultMassive[i].teamMassive) {
             let player = document.createElement('span');
             player.className = 'playerName';
@@ -351,6 +366,7 @@ function showBalanceTeams () {
         }
         
     }
+    playersOff();
 }
 function compareParametrs (massive) {
     let flag = false;
@@ -385,6 +401,40 @@ function randomizeMassive (massive) {
     pushNewElement();
     return randomMas;
 }
+function playersOff () {
+    let ratePlayersOff = 0;
+     for(let i in playersIn) {
+         let playerIn = false;
+         
+        loop:   for (let j in resultMassive) {
+            
+            for (let y in resultMassive[j].teamMassive) {
+                if (resultMassive[j].teamMassive[y].name == playersIn[i].name) {
+                    playerIn = true;
+                    break loop;
+                }
+            }
+            
+            
+        }
+        if (!playerIn) {
+            ratePlayersOff += playersIn[i].rate
+            console.log(playersIn[i].name)
+        }
+    }
+    console.log(ratePlayersOff/playersInTeam)
+    console.log(averageScorePlayer)
+}
 
+function numberOfPlayers () {
+    let howManyPlayers = 0;
+    for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
+        if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
+            howManyPlayers++;
+        }
+        
+    }
+    document.getElementById('playersToday').innerHTML = '(' + howManyPlayers + ' игроков' + ')';
+}
 showPlayers ();
 
