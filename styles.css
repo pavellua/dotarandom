@@ -1,3 +1,4 @@
+
 body {
     background-color: rgb(59, 59, 59);
     color: #fff;
@@ -8,11 +9,18 @@ body {
     margin: 0;
     font-family: 'Play', sans-serif;
 }
+.ageSpan {
+    margin-bottom: 15px;
+    font-size: 12px;
+}
 #game {
     display: flex;
     background-color: rgba(0, 0, 0, 0.8);
     
     padding: 20px 0 0 50px;
+}
+.goalkeeper {
+    color:#97bffc;
 }
 input {
     width: 25px;
@@ -65,7 +73,6 @@ margin-bottom: 20px;
 .teamName {
     font-size: 20px;
     font-weight: bold;
-    margin: 10px 0;
     color: rgb(219, 106, 0);
 }
 

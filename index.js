@@ -1,110 +1,141 @@
 const naborIgrokov = [
     {name: "Павло Чернобай",
-    rate: 9.5
+    rate: 9.5,
+    age: 31
 },
 {
     name: "Евгений Федоров",
-    rate: 6.5
+    rate: 6.5,
+    goalkeeper: true,
+    age: 34
 },
 {
     name: "Максим Федоров",
-    rate: 6.5
+    rate: 6.5,
+    age: 38
 },
 {
     name: "Тимур",
-    rate: 8.3
+    rate: 8.3,
+    age: 31
 },
 {
     name: "Сергей Федоров",
-    rate: 4
+    rate: 4,
+    goalkeeper: true,
+    age: 60
 },
 {
     name: "Алик",
-    rate: 7
+    rate: 7,
+    goalkeeper: true,
+    age: 62
 },
 {
     name: "Леня",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {
     name: "Игорь Тихоновский",
-    rate: 4.6
+    rate: 4.6,
+    age: 31
 },
 {
     name: "Руслан",
-    rate: 8
+    rate: 8,
+    age: 31
 },
 {
     name: "Ярик Кувшинчик",
-    rate: 9
+    rate: 9,
+    age: 35
 },
 {
     name: "Ярик 2",
-    rate: 7.5
+    rate: 7.5,
+    age: 31
 },
 {
     name: "Дядя Саша",
-    rate: 6
+    rate: 6,
+    age: 65
 },
 {
     name: "Брат Артем",
-    rate: 6.8
+    rate: 6.8,
+    age: 31
 },
 {
     name: "Брат Вадик",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {name: "Витя",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {
     name: "Мыкыта",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {
     name: "Семен",
-    rate: 7
+    rate: 7,
+    goalkeeper: true,
+    age: 31
 },
 {
     name: "Саня",
-    rate: 7.5
+    rate: 7.5,
+    age: 31
 },
 {
     name: "Ярик малой",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {
     name: "Даниил высокий",
-    rate: 5.5
+    rate: 5.5,
+    age: 31
 },
 {
     name: "Даниил малой",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {
     name: "Андрей",
-    rate: 6
+    rate: 6,
+    age: 31
 },
 {
     name: "Артем защитник",
-    rate: 6.2
+    rate: 6.2,
+    age: 31
 },
 {
     name: "Рома",
-    rate: 5
+    rate: 5,
+    goalkeeper: true,
+    age: 31
 },
 {
     name: "Дима",
-    rate: 8
+    rate: 8,
+    age: 31
 }
 ];
 let resultMassive;
-const rangeRate = 0.21;
+const rangeRate = 0.16;
 let playersInTeam;
 let kolKomand;
 let playersIn;
 let averageScorePlayer;
 let allTeamMas = [];
+let kolVratarey;;
 sortMas(naborIgrokov,'name');
 
 function showPlayers () {
@@ -123,6 +154,9 @@ function showPlayers () {
 
         let playerName = document.createElement('span');
         playerName.innerHTML = naborIgrokov[i].name;
+        if (naborIgrokov[i].goalkeeper) {
+            playerName.className = 'goalkeeper';
+        }
         playerDiv.append(playerName);
         
 
@@ -133,9 +167,15 @@ function showPlayers () {
 }
 function shuffleTeams () {
     playersIn = [];
+    kolVratarey = 0;
     for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
         if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
             playersIn.push(naborIgrokov[i]);
+            
+            if (naborIgrokov[i].goalkeeper) {
+                
+                kolVratarey++;
+            }
         }
         
     }
@@ -155,6 +195,7 @@ function shuffleTeams () {
             console.log('не делится')
         }
     }
+   
 }
 
 function randomShuffle () {
@@ -177,9 +218,10 @@ function randomShuffle () {
                 // document.getElementById('team'+teamNumber).append(player);
                 teamNumber++;
                 if (teamNumber>kolKomand) {
-                    resultMassive.push({
+                    console.log(Math.floor(averagePlayerTeamRate*100)/100);
+                    resultMassive.push({    
                         teamMassive: teamMas,
-                        averagePlayerTeamRate: averagePlayerTeamRate,
+                        averagePlayerTeamRate: Math.floor(averagePlayerTeamRate*100)/100,
                         differenceRate: Math.abs(averagePlayerTeamRate - averageScorePlayer)
                     });
                     teamNumber =1 ;
@@ -208,10 +250,17 @@ function fairShuffle () {
             let teamMas = [];
             let teamRate = 0;
             let playerIndex = '';
+            let numberOfGoalkeepers = 0;
+            let totalAge = 0;
+            let averageAgeTeam;
             for (let i in playersIndex) {
                 
                 if (playersIndex[i] == '-') {
                     teamRate += playersIn[playerIndex].rate;
+                    totalAge +=playersIn[playerIndex].age;
+                    if (playersIn[playerIndex].goalkeeper) {
+                        numberOfGoalkeepers++;
+                    }
                     
                 teamMas.push(playersIn[playerIndex])
                     playerIndex = '';
@@ -220,14 +269,24 @@ function fairShuffle () {
                     playerIndex += playersIndex[i];
                 }
             }
-
-            let averagePlayerTeamRate = teamRate/playersInTeam;
+            
+            let averagePlayerTeamRate = Math.floor(teamRate*100/playersInTeam)/100;
             if (Math.abs(averagePlayerTeamRate - averageScorePlayer) < rangeRate) {
-                allTeamMas.push({
-                    teamMassive: teamMas,
-                    averagePlayerTeamRate: averagePlayerTeamRate,
-                    differenceRate: Math.abs(averagePlayerTeamRate - averageScorePlayer)
+                if (kolVratarey<=kolKomand && numberOfGoalkeepers>1) {
+
+                }
+                else if (kolVratarey>kolKomand && numberOfGoalkeepers == 0) {
+                    
+                }
+                else {
+                    allTeamMas.push({
+                        teamMassive: teamMas,
+                        averagePlayerTeamRate: averagePlayerTeamRate,
+                        differenceRate: Math.abs(averagePlayerTeamRate - averageScorePlayer),
+                        averageAgeTeam: totalAge/playersInTeam
                 });
+                }
+                
             }
             
             
@@ -247,6 +306,7 @@ function fairShuffle () {
     }
     
     getTeam(0,0,'');
+    
     sortMas(allTeamMas,'differenceRate');
     getTeamsWithOptions (allTeamMas);
     
@@ -254,24 +314,17 @@ function fairShuffle () {
   
 
 document.getElementById('buttonShuffle').addEventListener('click', () => {
+    startShuffle ();
+    
+})
+function startShuffle () {
     resultMassive = [];
     document.getElementById('result').innerHTML = '';
     document.getElementById('players').style.display = 'none';
     kolKomand = document.getElementById('kolKomand').querySelector('input').value;
-    for (let i=0; i<kolKomand; i++) {
-        let teamDiv = document.createElement('div');
-        teamDiv.className = 'teamDiv';
-        teamDiv.id = 'team' + (i+1);
-        document.getElementById('result').append(teamDiv);
-        let teamName = document.createElement('span');
-        teamName.className = 'teamName';
-        teamName.innerHTML = 'Team ' + (i+1);
-        teamDiv.append(teamName);
-    }
-    shuffleTeams ();
     
-})
-
+    shuffleTeams ();
+}
 function selectAllPlayers () {
     
     if (document.getElementById('selectAll').querySelector('input').checked == true) {
@@ -307,7 +360,6 @@ function getTeamsWithOptions (massive) {
     
     
     if (document.getElementById('randomBalance').querySelector('input').checked != true) {
-        console.log('Максимально равные команды')
         for (let i in massive) {
             if (i ==0) {
                 resultMassive.push(massive[i]);
@@ -323,7 +375,6 @@ function getTeamsWithOptions (massive) {
         }
     }
     else {
-        console.log('Рандом из равных команд')
        
         function randomBalanceTeam () {
             
@@ -353,16 +404,42 @@ let kolCyklov = massive.length;
 
 
     }       
-    showBalanceTeams ();
+    if (kolKomand>resultMassive.length) {
+        console.log('Не могу подобрать команды')
+        startShuffle ();
+    }
+    else {  
+        showBalanceTeams ();
+    }
+    
 }
 function showBalanceTeams () {
+
     for(let i in resultMassive) {
-        document.getElementById('team' + (Number(i)+1)).querySelector('span').innerHTML += ' (' + resultMassive[i].averagePlayerTeamRate + ')';
+        let teamDiv = document.createElement('div');
+        teamDiv.className = 'teamDiv';
+        teamDiv.id = 'team' + (Number(i)+1);
+        document.getElementById('result').append(teamDiv);
+
+        let teamName = document.createElement('span');
+        teamName.className = 'teamName';
+        teamName.innerHTML = 'Team ' + (Number(i)+1);
+        teamDiv.append(teamName);
+        teamName.innerHTML += ' (' + resultMassive[i].averagePlayerTeamRate + ')';
+
+        let ageSpan = document.createElement('span');
+        ageSpan.className = 'ageSpan';
+        ageSpan.innerHTML = 'Средний возраст - ' + resultMassive[i].averageAgeTeam;
+        teamDiv.append(ageSpan);
+
         for (let j in resultMassive[i].teamMassive) {
             let player = document.createElement('span');
             player.className = 'playerName';
+            if (resultMassive[i].teamMassive[j].goalkeeper) {
+                player.className = 'goalkeeper';
+            }
             player.innerHTML = resultMassive[i].teamMassive[j].name;
-            document.getElementById('team'+(Number(i)+1)).append(player);
+            teamDiv.append(player);
         }
         
     }
@@ -422,8 +499,6 @@ function playersOff () {
             console.log(playersIn[i].name)
         }
     }
-    console.log(ratePlayersOff/playersInTeam)
-    console.log(averageScorePlayer)
 }
 
 function numberOfPlayers () {
@@ -431,6 +506,7 @@ function numberOfPlayers () {
     for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
         if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
             howManyPlayers++;
+            
         }
         
     }
