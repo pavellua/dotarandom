@@ -1,5 +1,5 @@
 const naborIgrokov = [
-    {name: "Павло Чернобай",
+    {name: "Павел Чернобай",
     rate: 9.5,
     age: 31
 },
@@ -7,7 +7,12 @@ const naborIgrokov = [
     name: "Евгений Федоров",
     rate: 6.5,
     goalkeeper: true,
-    age: 34
+    age: 32
+},
+{
+    name: "Алексей",
+    rate: 7.2,
+    age: 19
 },
 {
     name: "Максим Федоров",
@@ -23,7 +28,7 @@ const naborIgrokov = [
     name: "Сергей Федоров",
     rate: 4,
     goalkeeper: true,
-    age: 60
+    age: 62
 },
 {
     name: "Алик",
@@ -62,18 +67,18 @@ const naborIgrokov = [
     age: 65
 },
 {
-    name: "Брат Артем",
+    name: "Артем Примак",
     rate: 6.8,
-    age: 31
+    age: 16
 },
 {
-    name: "Брат Вадик",
+    name: "Вадим Примак",
     rate: 6,
-    age: 31
+    age: 15
 },
-{name: "Витя",
+{name: "Виктор Биличенко",
     rate: 6,
-    age: 31
+    age: 19
 },
 {
     name: "Мыкыта",
@@ -112,9 +117,9 @@ const naborIgrokov = [
     age: 31
 },
 {
-    name: "Артем защитник",
+    name: "Артем Кошуба",
     rate: 6.2,
-    age: 31
+    age: 18
 },
 {
     name: "Рома",
@@ -166,21 +171,7 @@ function showPlayers () {
     
 }
 function shuffleTeams () {
-    playersIn = [];
-    kolVratarey = 0;
-    for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
-        if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
-            playersIn.push(naborIgrokov[i]);
-            
-            if (naborIgrokov[i].goalkeeper) {
-                
-                kolVratarey++;
-            }
-        }
-        
-    }
     
-    playersIn = randomizeMassive (playersIn);
     if (document.getElementById('randomShuffle').querySelector('input').checked == true) {
         randomShuffle ();
     }
@@ -318,12 +309,34 @@ document.getElementById('buttonShuffle').addEventListener('click', () => {
     
 })
 function startShuffle () {
-    resultMassive = [];
-    document.getElementById('result').innerHTML = '';
-    document.getElementById('players').style.display = 'none';
+    playersIn = [];
+    kolVratarey = 0;
     kolKomand = document.getElementById('kolKomand').querySelector('input').value;
-    
+    for(let i=0; i<document.querySelectorAll('.playerDiv').length; i++) {
+        if (document.querySelectorAll('.playerDiv')[i].querySelector('input').checked == true) {
+            playersIn.push(naborIgrokov[i]);
+            
+            if (naborIgrokov[i].goalkeeper) {
+                
+                kolVratarey++;
+            }
+        }
+        
+    }
+    playersIn = randomizeMassive (playersIn);
+    if (playersIn.length%kolKomand == 0) {
+        
+        resultMassive = [];
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('errorMassage').innerHTML = '';
+    document.getElementById('players').style.display = 'none';
     shuffleTeams ();
+    }
+    else {
+        document.getElementById('errorMassage').innerHTML = 'Введите кратное количество игроков'
+    }
+
+    
 }
 function selectAllPlayers () {
     
