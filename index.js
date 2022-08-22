@@ -20,6 +20,11 @@ const naborIgrokov = [
     age: 38
 },
 {
+    name: "Даниил Игнатенко",
+    rate: 4.9,
+    age: 18
+},
+{
     name: "Тимур",
     rate: 8.3,
     age: 31
@@ -81,9 +86,9 @@ const naborIgrokov = [
     age: 19
 },
 {
-    name: "Мыкыта",
+    name: "Никита Зинченко",
     rate: 6,
-    age: 31
+    age: 18
 },
 {
     name: "Семен",
@@ -305,6 +310,8 @@ function fairShuffle () {
   
 
 document.getElementById('buttonShuffle').addEventListener('click', () => {
+    console.log('Идет поиск команд')
+    document.getElementById('errorMassage').innerHTML = 'Идет поиск команд'
     startShuffle ();
     
 })
@@ -328,7 +335,7 @@ function startShuffle () {
         
         resultMassive = [];
     document.getElementById('result').innerHTML = '';
-    document.getElementById('errorMassage').innerHTML = '';
+    
     document.getElementById('players').style.display = 'none';
     shuffleTeams ();
     }
@@ -422,12 +429,13 @@ let kolCyklov = massive.length;
         startShuffle ();
     }
     else {  
+        
         showBalanceTeams ();
     }
     
 }
 function showBalanceTeams () {
-
+    document.getElementById('errorMassage').innerHTML = '';
     for(let i in resultMassive) {
         let teamDiv = document.createElement('div');
         teamDiv.className = 'teamDiv';
