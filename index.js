@@ -21,7 +21,7 @@ const naborIgrokov = [
 },
 {
     name: "Даниил Игнатенко",
-    rate: 5.1,
+    rate: 4.9,
     age: 18
 },
 {
@@ -31,7 +31,7 @@ const naborIgrokov = [
 },
 {
     name: "Сергей Федоров",
-    rate: 4.7,
+    rate: 4,
     goalkeeper: true,
     age: 62
 },
