@@ -5,7 +5,7 @@ const naborIgrokov = [
 },
 {
     name: "Евгений Федоров",
-    rate: 6.5,
+    rate: 6.7,
     goalkeeper: true,
     age: 32
 },
@@ -16,12 +16,12 @@ const naborIgrokov = [
 },
 {
     name: "Максим Федоров",
-    rate: 6.5,
+    rate: 6.7,
     age: 38
 },
 {
     name: "Даниил Игнатенко",
-    rate: 4.9,
+    rate: 5.1,
     age: 18
 },
 {
@@ -31,7 +31,7 @@ const naborIgrokov = [
 },
 {
     name: "Сергей Федоров",
-    rate: 4,
+    rate: 4.7,
     goalkeeper: true,
     age: 62
 },
@@ -127,10 +127,20 @@ const naborIgrokov = [
     age: 18
 },
 {
-    name: "Рома",
-    rate: 5,
+    name: "Роман Шкуратько",
+    rate: 4.7,
     goalkeeper: true,
-    age: 31
+    age: 14
+},
+{
+    name: "Роман Пунишер",
+    rate: 5.1,
+    age: 21
+},
+{
+    name: "Илья Дектерьов",
+    rate: 5.3,
+    age: 15
 },
 {
     name: "Дима",
