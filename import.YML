@@ -1,0 +1,33 @@
+
+<yml_catalog date="2023-02-23 20:15">
+    <shop>
+     <name>ВСЕ ТОВАРЫ</name>
+<company>КРОН</company>
+<url>https://kronavto.ua/</url>
+<currencies>
+<currency id="USD" rate="CB"/>
+<currency id="RUR" rate="CB"/>
+<currency id="UAH" rate="1"/>
+<currency id="BYN" rate="CB"/>
+<currency id="KZT" rate="CB"/>
+<currency id="EUR" rate="CB"/>
+</currencies>
+       
+        <offers>
+            
+            <offer available="true" id="9331231231231212" selling_type="r">
+                <price>158.52</price>
+                <currencyId>UAH</currencyId>
+                <categoryId>16626</categoryId>
+                <picture>https://kronavto.ua/upload/iblock/ea4/ea4027c860ac7a1fcaed6a42eda101c2.jpeg</picture>
+                <delivery>true</delivery>
+                <name>Струбцина столярная тип F 50х250мм DIN5117 СИЛА</name>
+                <vendorCode>329133</vendorCode>
+                <description> <! [CDATA [ <br>Код: 077407; <br>Длина: 320; <br>Ширина: 80; <br>Высота: 20; <br>Упаковка: 40; <br>МинимальныйОстаток: 3;
+                    <br>КратностьОтгрузки: 1; <br>Вес: 0.39; <br>Найменування для ІМ Укр: Струбцина столярна тип F 50х250мм DIN5117
+                    СИЛА;]]></description>
+                <sales_notes>предоплата</sales_notes>
+            </offer>
+        </offers>
+    </shop>
+</yml_catalog>
