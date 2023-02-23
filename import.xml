@@ -23,9 +23,11 @@
                 <delivery>true</delivery>
                 <name>Струбцина столярная тип F 50х250мм DIN5117 СИЛА</name>
                 <vendorCode>329133</vendorCode>
-                <description> test </description>
+                <description> <! [CDATA [ <br>Код: 077407; <br>Длина: 320; <br>Ширина: 80; <br>Высота: 20; <br>Упаковка: 40; <br>МинимальныйОстаток: 3;
+                    <br>КратностьОтгрузки: 1; <br>Вес: 0.39; <br>Найменування для ІМ Укр: Струбцина столярна тип F 50х250мм DIN5117
+                    СИЛА;]]></description>
                 <sales_notes>предоплата</sales_notes>
-            </offer> 
+            </offer>
         </offers>
     </shop>
 </yml_catalog>
