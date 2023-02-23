@@ -15,7 +15,7 @@
        
         <offers>
             
-            <offer available="true" id="9999992" selling_type="r">
+            <offer available="true" id="9331231231231212" selling_type="r">
                 <price>158.52</price>
                 <currencyId>UAH</currencyId>
                 <categoryId>16626</categoryId>
@@ -23,9 +23,9 @@
                 <delivery>true</delivery>
                 <name>Струбцина столярная тип F 50х250мм DIN5117 СИЛА</name>
                 <vendorCode>329133</vendorCode>
-                <description> <! [CDATA [ <br>Код: 077407; <br>Длина: 320; <br>Ширина: 80; <br>Высота: 20; <br>Упаковка: 40; <br>МинимальныйОстаток: 3;
+                <description> <! [CDATA [ <p><br>Код: 077407; <br>Длина: 320; <br>Ширина: 80; <br>Высота: 20; <br>Упаковка: 40; <br>МинимальныйОстаток: 3;
                     <br>КратностьОтгрузки: 1; <br>Вес: 0.39; <br>Найменування для ІМ Укр: Струбцина столярна тип F 50х250мм DIN5117
-                    СИЛА;]]></description>
+                    СИЛА;</p>]]></description>
                 <sales_notes>предоплата</sales_notes>
             </offer>
         </offers>
